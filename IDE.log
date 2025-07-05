@@ -1,0 +1,81 @@
+15:23:03 DEBUG : Logs will be stored at '/home/june/Documents/balloon/IDE.log'.
+15:23:04 INFO  : Launching XSCT server: xsct -n  -interactive /home/june/Documents/balloon/temp_xsdb_launch_script.tcl
+15:23:04 INFO  : Platform repository initialization has completed.
+15:23:04 INFO  : Registering command handlers for Vitis TCF services
+15:23:06 INFO  : XSCT server has started successfully.
+15:23:06 INFO  : Successfully done setting XSCT server connection channel  
+15:23:06 INFO  : plnx-install-location is set to ''
+15:23:06 INFO  : Successfully done setting workspace for the tool. 
+15:23:06 INFO  : Successfully done query RDI_DATADIR 
+15:32:27 DEBUG : Logs will be stored at '/home/june/Documents/balloon/IDE.log'.
+15:32:27 INFO  : Launching XSCT server: xsct -n  -interactive /home/june/Documents/balloon/temp_xsdb_launch_script.tcl
+15:32:27 INFO  : Platform repository initialization has completed.
+15:32:27 INFO  : Registering command handlers for Vitis TCF services
+15:32:29 INFO  : XSCT server has started successfully.
+15:32:29 INFO  : Successfully done setting XSCT server connection channel  
+15:32:29 INFO  : plnx-install-location is set to ''
+15:32:29 INFO  : Successfully done query RDI_DATADIR 
+15:32:29 INFO  : Successfully done setting workspace for the tool. 
+15:32:39 DEBUG : Logs will be stored at '/home/june/Documents/balloon/IDE.log'.
+15:32:39 INFO  : Launching XSCT server: xsct -n  -interactive /home/june/Documents/balloon/temp_xsdb_launch_script.tcl
+15:32:39 INFO  : Platform repository initialization has completed.
+15:32:39 INFO  : Registering command handlers for Vitis TCF services
+15:32:41 INFO  : XSCT server has started successfully.
+15:32:41 INFO  : Successfully done setting XSCT server connection channel  
+15:32:41 INFO  : plnx-install-location is set to ''
+15:32:41 INFO  : Successfully done setting workspace for the tool. 
+15:32:41 INFO  : Successfully done query RDI_DATADIR 
+15:34:09 INFO  : Result from executing command 'getProjects': balloon_platform
+15:34:09 INFO  : Result from executing command 'getPlatforms': 
+15:34:09 WARN  : An unexpected exception occurred in the module 'platform project logging'
+15:34:09 INFO  : Platform 'balloon_platform' is added to custom repositories.
+15:34:14 INFO  : Platform 'balloon_platform' is added to custom repositories.
+15:34:56 INFO  : Result from executing command 'getProjects': balloon_platform
+15:34:56 INFO  : Result from executing command 'getPlatforms': balloon_platform|/home/june/Documents/balloon/balloon_platform/export/balloon_platform/balloon_platform.xpfm
+15:34:59 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+15:35:15 INFO  : XRT server has started successfully on port '4353'
+15:35:15 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:35:15 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+15:35:15 INFO  : 'jtag frequency' command is executed.
+15:35:15 INFO  : Context for 'APU' is selected.
+15:35:16 INFO  : System reset is completed.
+15:35:19 INFO  : 'after 3000' command is executed.
+15:35:19 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+15:35:21 INFO  : Device configured successfully with "/home/june/Documents/balloon/balloon_os/_ide/bitstream/system.bit"
+15:35:21 INFO  : Context for 'APU' is selected.
+15:35:21 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+15:35:21 INFO  : 'configparams force-mem-access 1' command is executed.
+15:35:21 INFO  : Context for 'APU' is selected.
+15:35:21 INFO  : Sourcing of '/home/june/Documents/balloon/balloon_os/_ide/psinit/ps7_init.tcl' is done.
+15:35:21 INFO  : 'ps7_init' command is executed.
+15:35:22 INFO  : 'ps7_post_config' command is executed.
+15:35:22 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:35:22 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:35:22 INFO  : 'configparams force-mem-access 0' command is executed.
+15:35:22 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}
+fpga -file /home/june/Documents/balloon/balloon_os/_ide/bitstream/system.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source /home/june/Documents/balloon/balloon_os/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:35:22 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:35:22 INFO  : 'con' command is executed.
+15:35:22 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:35:22 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
