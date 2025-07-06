@@ -106,6 +106,8 @@
 
 /***************************** Include Files *********************************/
 
+#define FSBL_DEBUG_INFO
+
 #include "fsbl.h"
 #include "qspi.h"
 #include "nand.h"
