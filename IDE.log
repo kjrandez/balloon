@@ -4126,3 +4126,636 @@ con
 ----------------End of Script----------------
 
 14:09:03 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:15:19 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:15:30 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:15:38 INFO  : Disconnected from the channel tcfchan#153.
+14:15:38 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:15:38 INFO  : 'fpga -state' command is executed.
+14:15:38 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:15:38 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:15:38 INFO  : 'jtag frequency' command is executed.
+14:15:38 INFO  : Context for 'APU' is selected.
+14:15:38 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:15:38 INFO  : 'configparams force-mem-access 1' command is executed.
+14:15:38 INFO  : Context for 'APU' is selected.
+14:15:38 INFO  : 'stop' command is executed.
+14:15:38 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:15:38 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:15:38 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:15:38 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:15:38 INFO  : 'configparams force-mem-access 0' command is executed.
+14:15:38 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:15:38 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:15:38 INFO  : 'con' command is executed.
+14:15:38 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:15:38 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:16:59 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:18:24 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:18:32 INFO  : Disconnected from the channel tcfchan#155.
+14:18:33 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:18:33 INFO  : 'fpga -state' command is executed.
+14:18:33 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:18:33 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:18:33 INFO  : 'jtag frequency' command is executed.
+14:18:33 INFO  : Context for 'APU' is selected.
+14:18:33 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:18:33 INFO  : 'configparams force-mem-access 1' command is executed.
+14:18:33 INFO  : Context for 'APU' is selected.
+14:18:33 INFO  : 'stop' command is executed.
+14:18:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:18:33 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:18:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:18:33 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:18:33 INFO  : 'configparams force-mem-access 0' command is executed.
+14:18:33 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:18:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:18:33 INFO  : 'con' command is executed.
+14:18:33 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:18:33 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:18:48 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:18:58 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:19:16 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:19:23 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:19:34 INFO  : Disconnected from the channel tcfchan#157.
+14:19:35 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:19:35 INFO  : 'fpga -state' command is executed.
+14:19:35 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:19:35 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:19:35 INFO  : 'jtag frequency' command is executed.
+14:19:35 INFO  : Context for 'APU' is selected.
+14:19:35 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:19:35 INFO  : 'configparams force-mem-access 1' command is executed.
+14:19:35 INFO  : Context for 'APU' is selected.
+14:19:35 INFO  : 'stop' command is executed.
+14:19:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:19:35 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:19:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:19:35 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:19:35 INFO  : 'configparams force-mem-access 0' command is executed.
+14:19:35 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:19:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:19:35 INFO  : 'con' command is executed.
+14:19:35 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:19:35 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:39:07 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:39:27 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:39:58 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:40:06 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:42:51 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:43:07 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:43:23 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:43:33 INFO  : Disconnected from the channel tcfchan#160.
+14:43:33 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:43:33 INFO  : 'fpga -state' command is executed.
+14:43:33 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:43:33 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:43:33 INFO  : 'jtag frequency' command is executed.
+14:43:33 INFO  : Context for 'APU' is selected.
+14:43:33 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:43:33 INFO  : 'configparams force-mem-access 1' command is executed.
+14:43:33 INFO  : Context for 'APU' is selected.
+14:43:33 INFO  : 'stop' command is executed.
+14:43:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:43:33 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:43:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:43:33 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:43:33 INFO  : 'configparams force-mem-access 0' command is executed.
+14:43:33 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:43:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:43:33 INFO  : 'con' command is executed.
+14:43:33 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:43:33 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:43:41 INFO  : Disconnected from the channel tcfchan#163.
+14:43:51 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:44:02 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:44:02 INFO  : 'fpga -state' command is executed.
+14:44:02 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:44:02 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:44:02 INFO  : 'jtag frequency' command is executed.
+14:44:02 INFO  : Context for 'APU' is selected.
+14:44:02 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:44:02 INFO  : 'configparams force-mem-access 1' command is executed.
+14:44:02 INFO  : Context for 'APU' is selected.
+14:44:02 INFO  : 'stop' command is executed.
+14:44:02 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:02 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:44:02 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:02 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:44:02 INFO  : 'configparams force-mem-access 0' command is executed.
+14:44:02 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:44:02 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:02 INFO  : 'con' command is executed.
+14:44:02 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:44:02 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:44:09 INFO  : Disconnected from the channel tcfchan#165.
+14:44:15 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:44:15 INFO  : 'fpga -state' command is executed.
+14:44:15 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:44:15 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:44:15 INFO  : 'jtag frequency' command is executed.
+14:44:15 INFO  : Context for 'APU' is selected.
+14:44:15 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:44:15 INFO  : 'configparams force-mem-access 1' command is executed.
+14:44:15 INFO  : Context for 'APU' is selected.
+14:44:15 INFO  : 'stop' command is executed.
+14:44:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:15 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:44:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:15 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:44:15 INFO  : 'configparams force-mem-access 0' command is executed.
+14:44:15 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:44:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:15 INFO  : 'con' command is executed.
+14:44:15 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:44:15 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:44:19 INFO  : Disconnected from the channel tcfchan#166.
+14:44:21 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:44:21 INFO  : 'fpga -state' command is executed.
+14:44:21 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:44:21 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:44:21 INFO  : 'jtag frequency' command is executed.
+14:44:21 INFO  : Context for 'APU' is selected.
+14:44:21 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:44:21 INFO  : 'configparams force-mem-access 1' command is executed.
+14:44:21 INFO  : Context for 'APU' is selected.
+14:44:21 INFO  : 'stop' command is executed.
+14:44:21 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:21 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:44:21 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:21 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:44:21 INFO  : 'configparams force-mem-access 0' command is executed.
+14:44:21 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:44:21 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:21 INFO  : 'con' command is executed.
+14:44:21 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:44:21 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:44:23 INFO  : Disconnected from the channel tcfchan#167.
+14:44:26 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:44:35 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:44:35 INFO  : 'fpga -state' command is executed.
+14:44:35 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:44:35 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:44:35 INFO  : 'jtag frequency' command is executed.
+14:44:35 INFO  : Context for 'APU' is selected.
+14:44:35 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:44:35 INFO  : 'configparams force-mem-access 1' command is executed.
+14:44:35 INFO  : Context for 'APU' is selected.
+14:44:35 INFO  : 'stop' command is executed.
+14:44:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:35 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:44:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:35 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:44:35 INFO  : 'configparams force-mem-access 0' command is executed.
+14:44:35 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:44:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:44:35 INFO  : 'con' command is executed.
+14:44:35 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:44:35 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:44:42 INFO  : Disconnected from the channel tcfchan#169.
+14:45:03 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:45:17 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:45:27 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:45:27 INFO  : 'fpga -state' command is executed.
+14:45:27 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:45:27 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:45:27 INFO  : 'jtag frequency' command is executed.
+14:45:27 INFO  : Context for 'APU' is selected.
+14:45:27 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:45:27 INFO  : 'configparams force-mem-access 1' command is executed.
+14:45:27 INFO  : Context for 'APU' is selected.
+14:45:27 INFO  : 'stop' command is executed.
+14:45:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:27 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:45:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:27 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:45:27 INFO  : 'configparams force-mem-access 0' command is executed.
+14:45:27 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:45:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:27 INFO  : 'con' command is executed.
+14:45:27 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:45:27 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:45:31 INFO  : Disconnected from the channel tcfchan#171.
+14:45:31 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:45:31 INFO  : 'fpga -state' command is executed.
+14:45:31 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:45:31 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:45:31 INFO  : 'jtag frequency' command is executed.
+14:45:31 INFO  : Context for 'APU' is selected.
+14:45:31 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:45:31 INFO  : 'configparams force-mem-access 1' command is executed.
+14:45:31 INFO  : Context for 'APU' is selected.
+14:45:31 INFO  : 'stop' command is executed.
+14:45:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:31 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:45:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:31 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:45:31 INFO  : 'configparams force-mem-access 0' command is executed.
+14:45:31 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:45:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:45:31 INFO  : 'con' command is executed.
+14:45:31 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:45:31 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:46:12 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:46:25 INFO  : Disconnected from the channel tcfchan#172.
+14:46:25 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:46:25 INFO  : 'fpga -state' command is executed.
+14:46:25 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:46:25 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:46:25 INFO  : 'jtag frequency' command is executed.
+14:46:25 INFO  : Context for 'APU' is selected.
+14:46:25 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:46:25 INFO  : 'configparams force-mem-access 1' command is executed.
+14:46:25 INFO  : Context for 'APU' is selected.
+14:46:25 INFO  : 'stop' command is executed.
+14:46:25 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:46:25 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:46:25 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:46:25 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:46:25 INFO  : 'configparams force-mem-access 0' command is executed.
+14:46:25 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:46:25 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:46:25 INFO  : 'con' command is executed.
+14:46:25 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:46:25 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:46:46 INFO  : Disconnected from the channel tcfchan#174.
+14:46:50 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+14:47:00 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:47:00 INFO  : 'fpga -state' command is executed.
+14:47:00 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:47:00 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:47:00 INFO  : 'jtag frequency' command is executed.
+14:47:00 INFO  : Context for 'APU' is selected.
+14:47:00 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:47:00 INFO  : 'configparams force-mem-access 1' command is executed.
+14:47:00 INFO  : Context for 'APU' is selected.
+14:47:00 INFO  : 'stop' command is executed.
+14:47:00 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:00 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:47:00 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:00 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:47:00 INFO  : 'configparams force-mem-access 0' command is executed.
+14:47:00 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:47:00 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:00 INFO  : 'con' command is executed.
+14:47:00 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:47:00 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:47:10 INFO  : Disconnected from the channel tcfchan#176.
+14:47:15 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+14:47:15 INFO  : 'fpga -state' command is executed.
+14:47:15 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:47:15 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+14:47:15 INFO  : 'jtag frequency' command is executed.
+14:47:15 INFO  : Context for 'APU' is selected.
+14:47:15 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+14:47:15 INFO  : 'configparams force-mem-access 1' command is executed.
+14:47:15 INFO  : Context for 'APU' is selected.
+14:47:15 INFO  : 'stop' command is executed.
+14:47:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:15 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:47:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:15 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:47:15 INFO  : 'configparams force-mem-access 0' command is executed.
+14:47:15 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:47:16 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:47:16 INFO  : 'con' command is executed.
+14:47:16 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:47:16 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+14:47:31 INFO  : Disconnected from the channel tcfchan#177.
+15:05:16 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+15:05:27 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+15:05:27 INFO  : 'fpga -state' command is executed.
+15:05:27 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:05:27 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+15:05:27 INFO  : 'jtag frequency' command is executed.
+15:05:27 INFO  : Context for 'APU' is selected.
+15:05:27 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+15:05:27 INFO  : 'configparams force-mem-access 1' command is executed.
+15:05:27 INFO  : Context for 'APU' is selected.
+15:05:27 INFO  : 'stop' command is executed.
+15:05:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:05:27 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+15:05:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:05:27 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:05:27 INFO  : 'configparams force-mem-access 0' command is executed.
+15:05:27 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:05:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:05:27 INFO  : 'con' command is executed.
+15:05:27 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:05:27 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+15:07:49 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+15:07:59 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+15:08:08 INFO  : Disconnected from the channel tcfchan#179.
+15:08:08 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+15:08:08 INFO  : 'fpga -state' command is executed.
+15:08:08 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:08:08 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+15:08:08 INFO  : 'jtag frequency' command is executed.
+15:08:08 INFO  : Context for 'APU' is selected.
+15:08:08 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+15:08:08 INFO  : 'configparams force-mem-access 1' command is executed.
+15:08:08 INFO  : Context for 'APU' is selected.
+15:08:08 INFO  : 'stop' command is executed.
+15:08:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:08:08 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+15:08:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:08:08 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:08:08 INFO  : 'configparams force-mem-access 0' command is executed.
+15:08:08 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:08:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:08:08 INFO  : 'con' command is executed.
+15:08:08 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:08:08 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
+15:08:56 INFO  : Checking for BSP changes to sync application flags for project 'balloon_os'...
+15:09:05 INFO  : Disconnected from the channel tcfchan#182.
+15:09:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248B4AA3E" && level==0 && jtag_device_ctx=="jsn-Zed-210248B4AA3E-23727093-0"}' command is executed.
+15:09:05 INFO  : 'fpga -state' command is executed.
+15:09:05 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:09:06 INFO  : Jtag cable 'Digilent Zed 210248B4AA3E' is selected.
+15:09:06 INFO  : 'jtag frequency' command is executed.
+15:09:06 INFO  : Context for 'APU' is selected.
+15:09:06 INFO  : Hardware design and registers information is loaded from '/home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa'.
+15:09:06 INFO  : 'configparams force-mem-access 1' command is executed.
+15:09:06 INFO  : Context for 'APU' is selected.
+15:09:06 INFO  : 'stop' command is executed.
+15:09:06 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:09:06 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+15:09:06 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:09:06 INFO  : The application '/home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:09:06 INFO  : 'configparams force-mem-access 0' command is executed.
+15:09:06 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw /home/june/Documents/balloon/balloon_platform/export/balloon_platform/hw/system.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+stop
+targets -set -nocase -filter {name =~ "*A9*#0"}
+rst -processor
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow /home/june/Documents/balloon/balloon_os/Debug/balloon_os.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:09:06 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:09:06 INFO  : 'con' command is executed.
+15:09:06 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:09:06 INFO  : Launch script is exported to file '/home/june/Documents/balloon/balloon_system/_ide/scripts/systemdebugger_balloon_system_standalone.tcl'
