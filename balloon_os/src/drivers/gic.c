@@ -44,17 +44,24 @@ void gic_intr_end(uint32_t intr_desc)
 	XScuGic_WriteReg(XPAR_SCUGIC_0_CPU_BASEADDR, XSCUGIC_EOI_OFFSET, intr_desc);
 }
 
-void gic_intr_enable(int intr, int enabled)
+void gic_intr_enable(int intr)
 {
 	// 32 consecutive interrupts per register, each 1 bit
 	uint32_t reg_offset = (intr / 32) * 4;
 	uint32_t reg_bit = intr % 32;
 	uint32_t reg_val = 1 << reg_bit;
 
-	if (enabled) {
-		XScuGic_WriteReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_ENABLE_SET_OFFSET + reg_offset, reg_val);
-	} else {
-		XScuGic_WriteReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_DISABLE_OFFSET + reg_offset, reg_val);
+	XScuGic_WriteReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_ENABLE_SET_OFFSET + reg_offset, reg_val);
+
+	// For shared interrupts, need to set which CPUs to route to
+	if (intr >= 32) {
+		reg_offset = (intr / 4) * 4;
+		reg_bit = (intr % 4) * 8;
+
+		reg_val = XScuGic_ReadReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_SPI_TARGET_OFFSET + reg_offset);
+		reg_val |= 1 << reg_bit;
+
+		XScuGic_WriteReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_SPI_TARGET_OFFSET + reg_offset, reg_val);
 	}
 }
 

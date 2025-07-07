@@ -25,7 +25,7 @@ static int32_t getnum( charptr *linep);
 static void outbyte(char c);
 
 void outbyte(char c) {
-	 uart_send(STDOUT_BASEADDRESS, c);
+	 uart_send(c);
 }
 
 /**************************** Type Definitions *******************************/

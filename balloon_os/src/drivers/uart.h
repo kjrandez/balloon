@@ -3,8 +3,11 @@
 #include "xilinx/xil_io.h"
 #include "xilinx/xstatus.h"
 
-void uart_reset(uint32_t BaseAddress);
-void uart_send(uint32_t BaseAddress, uint8_t Data);
+void uart_reset();
+void uart_send(uint8_t Data);
+uint32_t uart_recv(char* buffer, uint32_t length);
+uint32_t uart_irq_status();
+void uart_irq_clear(uint32_t status);
 
 /************************** Constant Definitions *****************************/
 

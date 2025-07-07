@@ -5,7 +5,7 @@
 #include "xilinx/bspconfig.h"
 
 void gic_reset();
-void gic_intr_enable(int intr, int enabled);
+void gic_intr_enable(int intr);
 uint32_t gic_intr_ack();
 void gic_intr_end(uint32_t intr_desc);
 
