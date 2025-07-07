@@ -1,34 +1,4 @@
-/******************************************************************************
-* Copyright (c) 2002 - 2021 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022-2023, Advanced Micro Devices, Inc. All Rights Reserved. *
-* SPDX-License-Identifier: MIT
-******************************************************************************/
-
-/*****************************************************************************/
-/**
-*
-* @file xstatus.h
-*
-* @addtogroup common_status_codes Xilinx software status codes
-*
-* The xstatus.h file contains the Xilinx software status codes.These codes are
-* used throughout the Xilinx device drivers.
-*
-* @{
-******************************************************************************/
-
-/**
- *@cond nocomments
- */
-
-#ifndef XSTATUS_H		/* prevent circular inclusions */
-#define XSTATUS_H		/* by using protection macros */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/***************************** Include Files *********************************/
+#pragma once
 
 #include <inttypes.h>
 #include "bspconfig.h"
@@ -503,22 +473,3 @@ extern "C" {
 /**************************** Type Definitions *******************************/
 
 typedef int32_t XStatus;
-
-/***************** Macros (Inline Functions) Definitions *********************/
-
-
-/************************** Function Prototypes ******************************/
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* end of protection macro */
-
-/**
- *@endcond
- */
-
-/**
-* @} End of "addtogroup common_status_codes".
-*/

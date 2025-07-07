@@ -1,5 +1,4 @@
-#ifndef XPARAMETERS_H   /* prevent circular inclusions */
-#define XPARAMETERS_H   /* by using protection macros */
+#pragma once
 
 /* Definition for CPU ID */
 #define XPAR_CPU_ID 0U
@@ -546,8 +545,3 @@
 #define XPAR_XADCPS_0_DEVICE_ID XPAR_PS7_XADC_0_DEVICE_ID
 #define XPAR_XADCPS_0_BASEADDR 0xF8007100
 #define XPAR_XADCPS_0_HIGHADDR 0xF8007120
-
-
-/******************************************************************/
-
-#endif  /* end of protection macro */

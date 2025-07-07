@@ -1,14 +1,24 @@
 .arm
 
-.global intr_svc_call
+.global call_svc
+.global get_cpsr
+.global set_cpsr
 
 .section .text
 
-intr_svc_call:
+call_svc:
 	push {lr}
 
-	# R0 passed, R3 returned
+	# R0 passed and returned
 	svc 0
 
 	pop {lr}
+	bx lr
+
+get_cpsr:
+	mrs r0, cpsr
+	bx lr
+
+set_cpsr:
+	msr cpsr, r0
 	bx lr

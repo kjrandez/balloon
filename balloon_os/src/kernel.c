@@ -1,54 +1,65 @@
 #include "drivers/uart.h"
 #include "drivers/time.h"
+#include "drivers/gic.h"
+
 #include "printf.h"
 
-uint32_t intr_svc_call(uint32_t param);
+#define XREG_CPSR_IRQ_ENABLE (0x80)
+#define XREG_CPSR_FIQ_ENABLE (0x40)
+
+uint32_t call_svc(uint32_t param);
+uint32_t get_cpsr();
+void set_cpsr(uint32_t new_val);
+
+void enable_irq() {
+	uint32_t cpsr = get_cpsr();
+	cpsr &= ~XREG_CPSR_IRQ_ENABLE;
+	set_cpsr(cpsr);
+}
 
 uint32_t intr_svc(uint32_t param) {
-	xil_printf("! SVC Interrupt\n");
+	xil_printf("[!] SVC Interrupt: %x\n", param);
 
 	return param * 3;
 }
 
 void intr_irq() {
-	xil_printf("! IRQ Interrupt\n");
-}
+	uint32_t intr_desc = gic_intr_ack();
+	uint32_t intr_id = intr_desc & 0x03FF;
 
-void intr_fiq() {
-	xil_printf("! FIQ Interrupt\n");
-}
+	// ignore spurious interrupts
+	if (intr_id == 0x3FF)
+		return;
 
-uint32_t time_seconds() {
-	uint64_t time_counts;
+	// handle irq based upon valid interrupt id
+	switch (intr_id) {
+	case 27:
+		xil_printf("Time: %u\n", time_get_seconds());
+		time_irq_clear();
+		break;
+	default:
+		xil_printf("[!] IRQ Interrupt: %x\n", intr_desc);
+		break;
+	}
 
-	time_get(&time_counts);
-
-	return time_counts / COUNTS_PER_SECOND;
+	// unconditionally end a valid interrupt
+	gic_intr_end(intr_desc);
 }
 
 void kernel_main()
 {
 	time_reset();
+	gic_reset();
 	//uart_reset(STDOUT_BASEADDRESS);
 
 	xil_printf("Hello kernel\n");
 
-	uint32_t res = intr_svc_call(12);
+	uint32_t res = call_svc(12);
 
 	xil_printf("Completed call: %u\n", res);
 
-	uint32_t time = time_seconds();
-	uint32_t status;
+	enable_irq();
+	gic_intr_enable(27, 1);
 
-	while (1) {
-		if (time_seconds() != time) {
-			time = time_seconds();
-			status = time_irq_status();
-			xil_printf("Time: %u, Status: %u\n", time, status);
-
-			if (status) {
-				time_irq_clear();
-			}
-		}
-	}
+	for (;;);
 }

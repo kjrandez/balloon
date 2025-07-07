@@ -1,47 +1,4 @@
-/******************************************************************************
-* Copyright (c) 2010 - 2021 Xilinx, Inc.  All rights reserved.
-* SPDX-License-Identifier: MIT
-******************************************************************************/
-
-/*****************************************************************************/
-/**
-* @file xparameters_ps.h
-*
-* This file contains the address definitions for the hard peripherals
-* attached to the ARM Cortex A9 core.
-*
-* <pre>
-* MODIFICATION HISTORY:
-*
-* Ver   Who     Date     Changes
-* ----- ------- -------- ---------------------------------------------------
-* 1.00a ecm/sdm 02/01/10 Initial version
-* 3.04a sdm     02/02/12 Removed some of the defines as they are being generated through
-*                        driver tcl
-* 5.0	pkp		01/16/15 Added interrupt ID definition of ttc for TEST APP
-* 6.6   srm     10/18/17 Added ARMA9 macro to identify CortexA9
-*
-* </pre>
-*
-* @note
-*
-* None.
-*
-******************************************************************************/
-
-/**
- *@cond nocomments
- */
-
-#ifndef _XPARAMETERS_PS_H_
-#define _XPARAMETERS_PS_H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/****************************  Include Files  *******************************/
-
+#pragma once
 
 /************************** Constant Definitions *****************************/
 
@@ -321,14 +278,3 @@ extern "C" {
 #define XPAR_PS7_TTC_3_INTERRUPT_ID	0x4025
 #define XPAR_PS7_TTC_4_INTERRUPT_ID	0x4026
 #define XPAR_PS7_TTC_5_INTERRUPT_ID	0x4027
-
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* protection macro */
-
-/**
- *@endcond
- */

@@ -4,7 +4,8 @@
 #include "xilinx/xparameters.h"
 
 void time_reset();
-void time_get(uint64_t* time);
+uint64_t time_get();
+uint32_t time_get_seconds();
 uint32_t time_irq_status();
 void time_irq_clear();
 

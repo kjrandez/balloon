@@ -6,7 +6,7 @@
 void time_reset()
 {
 	uint64_t time = 0;
-	uint32_t period = COUNTS_PER_SECOND * 3;
+	uint32_t period = COUNTS_PER_SECOND;
 
 	// Disable Global Timer
 	Xil_Out32(GLOBAL_TMR_BASEADDR + GTIMER_CONTROL_OFFSET, 0);
@@ -43,19 +43,7 @@ void time_irq_clear()
 	Xil_Out32(GLOBAL_TMR_BASEADDR + GTIMER_INTR_OFFSET, 1);
 }
 
-/****************************************************************************/
-/**
-* @brief	Get the time from the Global Timer Counter Register.
-*
-* @param	Xtime_Global: Pointer to the 64-bit location which will be
-*			updated with the current timer value.
-*
-* @return	None.
-*
-* @note		None.
-*
-****************************************************************************/
-void time_get(uint64_t* time)
+uint64_t time_get()
 {
 	uint32_t low;
 	uint32_t high;
@@ -67,5 +55,13 @@ void time_get(uint64_t* time)
 		low = Xil_In32(GLOBAL_TMR_BASEADDR + GTIMER_COUNTER_LOWER_OFFSET);
 	} while(Xil_In32(GLOBAL_TMR_BASEADDR + GTIMER_COUNTER_UPPER_OFFSET) != high);
 
-	*time = (((uint64_t) high) << 32U) | (uint64_t) low;
+	uint64_t time = (((uint64_t) high) << 32U) | (uint64_t) low;
+
+	return time;
+}
+
+uint32_t time_get_seconds() {
+	uint64_t time_counts = time_get();
+
+	return time_counts / COUNTS_PER_SECOND;
 }
