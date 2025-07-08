@@ -17,23 +17,21 @@ static uint32_t mem_size = 0x40000000;
 static thread_state_t threads[10];
 static int selected_thread = -1;
 
-uint32_t get_cpsr();
-void set_cpsr(uint32_t new_val);
-
-static void enable_irq();
+static void sched_add(intr_context_t* intr_context);
+static void sched_tick(intr_context_t* intr_context);
 
 void intr_svc(intr_context_t* intr_context) {
 	// arguments for svc call in r0-2
 	uint32_t call = intr_context->r[0];
 	uint32_t param0 = intr_context->r[1];
 	uint32_t param1 = intr_context->r[2];
-	uint32_t result;
 
 	switch (call) {
-	case 0:
-		result = param0 * param1;
+	case SVC_MULTIPLY:
+		intr_context->r[0] = param0 * param1;
 		break;
-	case 1:
+	case SVC_START_THREAD:
+		sched_add(intr_context);
 		break;
 	case 2:
 		break;
@@ -42,9 +40,6 @@ void intr_svc(intr_context_t* intr_context) {
 	default:
 		xil_printf("[!] SVC Interrupt: %x\r\n", call);
 	}
-
-	// return value by setting restored context's r0
-	intr_context->r[0] = result;
 }
 
 void intr_irq(intr_context_t* intr_context) {
@@ -60,6 +55,7 @@ void intr_irq(intr_context_t* intr_context) {
 	switch (intr_id) {
 	case 27: {
 		xil_printf("Time: %u\r\n", time_get_seconds());
+		sched_tick(intr_context);
 		time_irq_clear();
 		break;
 	}
@@ -86,7 +82,6 @@ void kernel_main()
 	time_reset();
 	gic_reset();
 	uart_reset();
-	enable_irq();
 
 	xil_printf("Hello kernel\r\n");
 
@@ -108,8 +103,14 @@ void kernel_main()
 	gic_intr_enable(82);
 }
 
-static void enable_irq() {
-	uint32_t cpsr = get_cpsr();
-	cpsr &= ~0x80;
-	set_cpsr(cpsr);
+void sched_add(intr_context_t* intr_context)
+{
+
 }
+
+void sched_tick(intr_context_t* intr_context)
+{
+
+}
+
+

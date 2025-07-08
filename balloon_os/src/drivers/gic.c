@@ -1,7 +1,6 @@
 #include "stdbool.h"
-#include "../printf.h"
 #include "gic.h"
-
+#include "../util.h"
 
 void gic_reset()
 {
@@ -32,6 +31,11 @@ void gic_reset()
 
 	// Enable GIC signaling of interrupts to CPU
 	XScuGic_WriteReg(XPAR_SCUGIC_0_CPU_BASEADDR, XSCUGIC_CONTROL_OFFSET, 0x07U);
+
+	// Unmask IRQ from the cpu
+	uint32_t cpsr = get_cpsr();
+	cpsr &= ~0x80;
+	set_cpsr(cpsr);
 }
 
 uint32_t gic_intr_ack()
@@ -64,4 +68,3 @@ void gic_intr_enable(int intr)
 		XScuGic_WriteReg(XPAR_SCUGIC_0_DIST_BASEADDR, XSCUGIC_SPI_TARGET_OFFSET + reg_offset, reg_val);
 	}
 }
-

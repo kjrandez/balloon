@@ -2,6 +2,11 @@
 
 #include "inttypes.h"
 
+#define SVC_MULTIPLY 		(0)
+#define SVC_START_THREAD	(1)
+#define SVC_PUT_CHAR 		(2)
+#define SVC_GET_CHAR 		(3)
+
 typedef struct {
 	uint32_t cpsr;
 	uint32_t lr;
