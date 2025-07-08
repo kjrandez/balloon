@@ -1,29 +1,53 @@
+#include "kernel.h"
 #include "drivers/uart.h"
 #include "drivers/time.h"
 #include "drivers/gic.h"
-
 #include "printf.h"
+#include "api.h"
 
-#define XREG_CPSR_IRQ_ENABLE (0x80)
-#define XREG_CPSR_FIQ_ENABLE (0x40)
+extern uint32_t _vector_table;
+extern uint32_t _stack;
+extern uint32_t _stack_end;
+extern uint32_t _irq_stack;
+extern uint32_t _svc_stack;
+extern uint32_t _heap;
 
-uint32_t call_svc(uint32_t param);
+static uint32_t mem_size = 0x40000000;
+
+static thread_state_t threads[10];
+static int selected_thread = -1;
+
 uint32_t get_cpsr();
 void set_cpsr(uint32_t new_val);
 
-void enable_irq() {
-	uint32_t cpsr = get_cpsr();
-	cpsr &= ~XREG_CPSR_IRQ_ENABLE;
-	set_cpsr(cpsr);
+static void enable_irq();
+
+void intr_svc(intr_context_t* intr_context) {
+	// arguments for svc call in r0-2
+	uint32_t call = intr_context->r[0];
+	uint32_t param0 = intr_context->r[1];
+	uint32_t param1 = intr_context->r[2];
+	uint32_t result;
+
+	switch (call) {
+	case 0:
+		result = param0 * param1;
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		xil_printf("[!] SVC Interrupt: %x\r\n", call);
+	}
+
+	// return value by setting restored context's r0
+	intr_context->r[0] = result;
 }
 
-uint32_t intr_svc(uint32_t param) {
-	xil_printf("[!] SVC Interrupt: %x\r\n", param);
-
-	return param * 3;
-}
-
-void intr_irq() {
+void intr_irq(intr_context_t* intr_context) {
 	char buf[65];
 	uint32_t intr_desc = gic_intr_ack();
 	uint32_t intr_id = intr_desc & 0x03FF;
@@ -45,7 +69,7 @@ void intr_irq() {
 		uart_irq_clear(status);
 
 		buf[len] = 0;
-		xil_printf("[%s]", buf);
+		xil_printf("%s", buf);
 		break;
 	}
 	default:
@@ -62,16 +86,30 @@ void kernel_main()
 	time_reset();
 	gic_reset();
 	uart_reset();
+	enable_irq();
 
 	xil_printf("Hello kernel\r\n");
 
-	uint32_t res = call_svc(12);
+	uint32_t stack_size = (&_stack - &_stack_end) * 4; // end is lower address
+	uint32_t heap_size = mem_size - (uint32_t)&_heap;
 
+	xil_printf("Vectors:    0x%08x\r\n", (uint32_t)&_vector_table);
+	xil_printf("SYS Stack:  0x%08x - 0x%08x\r\n", (uint32_t)&_stack_end, (uint32_t)&_stack);
+	xil_printf("IRQ Stack:  0x%08x\r\n", (uint32_t)&_irq_stack);
+	xil_printf("SVC Stack:  0x%08x\r\n", (uint32_t)&_svc_stack);
+	xil_printf("SYS Heap:   0x%08x - 0x%08x\r\n", (uint32_t)&_heap, (uint32_t)&_vector_table + mem_size);
+	xil_printf("Stack Size: 0x%08x\r\n", stack_size);
+	xil_printf("Heap Size:  0x%08x\r\n", heap_size);
+
+	uint32_t res = multiply(3, 12);
 	xil_printf("Completed call: %u\r\n", res);
 
-	enable_irq();
 	gic_intr_enable(27);
 	gic_intr_enable(82);
+}
 
-	for (;;);
+static void enable_irq() {
+	uint32_t cpsr = get_cpsr();
+	cpsr &= ~0x80;
+	set_cpsr(cpsr);
 }

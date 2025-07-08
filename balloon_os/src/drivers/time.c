@@ -65,3 +65,9 @@ uint32_t time_get_seconds() {
 
 	return time_counts / COUNTS_PER_SECOND;
 }
+
+uint32_t time_get_milliseconds() {
+	uint64_t time_counts = time_get();
+
+	return time_counts * 1000 / COUNTS_PER_SECOND;
+}

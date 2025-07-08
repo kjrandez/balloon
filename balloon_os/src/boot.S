@@ -1,4 +1,7 @@
 .global _vector_table
+.global _stack
+.global _irq_stack
+.global _svc_stack
 
 .section .vectors
 
@@ -15,7 +18,13 @@ _vector_table:
 .section .boot,"ax"
 
 .set vector_table_addr, _vector_table
-.set CRValMmuCac,	0b01000000000101	/* Enable IDC, and MMU */
+.set CRValMmuCac,	0b01000000000101 // Enables IDC and MMU
+.set SVC_stack,		_svc_stack
+.set IRQ_stack,		_irq_stack
+.set SYS_stack,		_stack
+.set IRQ_MODE,		0x12
+.set SVC_MODE, 		0x13
+.set SYS_MODE, 		0x1F
 
 _boot_handler:
     b _start
@@ -25,22 +34,43 @@ _undef_handler:
 	b _undef_handler
 
 _svc_handler:
-	#stmdb	sp!,{r0-r3,r12,lr}
-	push {r12,lr}
+	// preserve registers including original PC, which was auto-stored in LR
+	push {r0-r12, lr} // +14
 
-	# TODO: handle svc call from thumb instruction
-	#tst	r0, #0x20			/* check the T bit */
-	#ldrneh	r0, [lr,#-2]			/* Thumb mode */
-	#bicne	r0, r0, #0xff00			/* Thumb mode */
-	#ldreq	r0, [lr,#-4]			/* ARM mode */
-	#biceq	r0, r0, #0xff000000		/* ARM mode */
+	// temporarily switch to previous mode to record shadowed registers SP, LR
+	cps #SYS_MODE
+	mov r0, sp
+	mov r1, lr
+	cps #SVC_MODE
 
+	// preserve SP, LR
+	push {r0, r1} // +2
+
+	// save current SPSR (returning cpu execution state)
+	mrs r0, spsr
+	push {r0} // + 1
+
+	// pass stack pointer as arg 0 pointing to the list of preserved registers (17 words)
+	mov r0, sp
 	bl intr_svc
 
-	#ldmia	sp!,{r0-r3,r12,lr}
-	pop {r12,lr}
+	// restore saved SPSR
+	pop {r0} // -1
+	msr spsr, r0
 
-	// note the "s" suffix is restoring SPSR to CPSR
+	// fetch SP, LR
+	pop {r0, r1} // -2
+
+	// temporarily switch to previous mode to restore shadowed registers
+	cps #SYS_MODE
+	mov lr, r1
+	mov sp, r0
+	cps #SVC_MODE
+
+	// restore registers
+	pop {r0-r12, lr} // -14
+
+	// return, note the "s" suffix is restoring SPSR to CPSR
 	movs pc, lr
 
 _pf_abort_handler:
@@ -52,16 +82,43 @@ _data_abort_handler:
 	b _data_abort_handler
 
 _irq_handler:
-	#stmdb	sp!,{r0-r3,r12,lr}
-	push {r0-r3,r12,lr}
+	// preserve registers including original PC, which was auto-stored in LR
+	push {r0-r12, lr} // +14
 
+	// temporarily switch to previous mode to record shadowed registers SP, LR
+	cps #SYS_MODE
+	mov r0, sp
+	mov r1, lr
+	cps #IRQ_MODE
+
+	// preserve SP, LR
+	push {r0, r1} // +2
+
+	// save current SPSR (returning cpu execution state)
+	mrs r0, spsr
+	push {r0} // + 1
+
+	// pass stack pointer as arg 0 pointing to the list of preserved registers (17 words)
+	mov r0, sp
 	bl intr_irq
 
-	#ldmia	sp!,{r0-r3,r12,lr}
-	pop {r0-r3,r12,lr}
+	// restore saved SPSR
+	pop {r0} // -1
+	msr spsr, r0
+
+	// fetch SP, LR
+	pop {r0, r1} // -2
+
+	// temporarily switch to previous mode to restore shadowed registers
+	cps #SYS_MODE
+	mov lr, r1
+	mov sp, r0
+	cps #IRQ_MODE
+
+	// restore registers
+	pop {r0-r12, lr} // -14
 
 	// return to same instruction, rather than following instruction
-	// note the "s" suffix is restoring SPSR to CPSR, unmasking the IRQ interrupt
 	subs pc, lr, #4
 
 _fiq_handler:
@@ -85,18 +142,34 @@ _fiq_handler:
 	.long	__bss_end
 
 .Lstack:
-	.long	__stack
+	.long	_stack
 
 _start:
-	# Set VBAR reg to vector table address, since we're mapped to 0x100000 instead of 0x0
+	ldr r0, =SYS_stack
+	ldr r0, =SVC_stack
+	ldr r0, =IRQ_stack
+
+	// Set VBAR reg to vector table address, since we're mapped to 0x100000 instead of 0x0
 	ldr	r0, =vector_table_addr
 	mcr	p15, 0, r0, c12, c0, 0
 
-	/* Enable mmu, icahce and dcache */
+	// Enable mmu, icahce and dcache (apparently)
 	ldr	r0,=CRValMmuCac
-	mcr	p15,0,r0,c1,c0,0		/* Enable cache and MMU */
-	dsb					/* dsb	allow the MMU to start up */
-	isb					/* isb	flush prefetch buffer */
+	mcr	p15,0,r0,c1,c0,0 	// Enable cache and MMU
+	dsb 					// dsb allow the MMU to start up
+	isb						// isb flush prefetch buffer
+
+	// Set up IRQ Mode Stack
+	cps #IRQ_MODE
+	ldr	r13, =IRQ_stack		// set stack pointer for this mode
+
+	// Set up SVC Mode Stack
+	cps #SVC_MODE
+	ldr	r13, =SVC_stack
+
+	// Set up SYS (Current) Mode Stack
+	cps #SYS_MODE
+	ldr	r13, =SYS_stack
 
 	mov	r0, #0
 
@@ -123,16 +196,13 @@ _start:
 
 .Lenclbss:
 
-	/* set stack pointer */
-	ldr	r13,.Lstack		/* stack address */
-
-    /* run global constructors */
+    // run global constructors
     bl __libc_init_array
 
-	/* Let her rip */
+	// run kernel
 	bl	kernel_main
 
-    /* Cleanup global constructors */
+    // cleanup global constructors
     bl __libc_fini_array
 
 .Lexit:

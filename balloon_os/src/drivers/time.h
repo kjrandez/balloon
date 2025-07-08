@@ -6,6 +6,7 @@
 void time_reset();
 uint64_t time_get();
 uint32_t time_get_seconds();
+uint32_t time_get_milliseconds();
 uint32_t time_irq_status();
 void time_irq_clear();
 
