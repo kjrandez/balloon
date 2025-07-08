@@ -6,7 +6,7 @@
 void time_reset()
 {
 	uint64_t time = 0;
-	uint32_t period = COUNTS_PER_SECOND;
+	uint32_t period = COUNTS_PER_SECOND / 1000;
 
 	// Disable Global Timer
 	Xil_Out32(GLOBAL_TMR_BASEADDR + GTIMER_CONTROL_OFFSET, 0);

@@ -3,6 +3,8 @@
 #include "drivers/time.h"
 #include "drivers/gic.h"
 #include "printf.h"
+#include "program.h"
+#include "util.h"
 #include "api.h"
 
 extern uint32_t _vector_table;
@@ -14,9 +16,13 @@ extern uint32_t _heap;
 
 static uint32_t mem_size = 0x40000000;
 
-static thread_state_t threads[10];
+#define THREAD_STACK_SIZE (0x20000)
+#define MAX_THREADS (10)
+static int num_threads = 0;
 static int selected_thread = -1;
+static thread_state_t threads[MAX_THREADS];
 
+static void sched_init(intr_context_t* intr_context);
 static void sched_add(intr_context_t* intr_context);
 static void sched_tick(intr_context_t* intr_context);
 
@@ -54,7 +60,6 @@ void intr_irq(intr_context_t* intr_context) {
 	// handle irq based upon valid interrupt id
 	switch (intr_id) {
 	case 27: {
-		xil_printf("Time: %u\r\n", time_get_seconds());
 		sched_tick(intr_context);
 		time_irq_clear();
 		break;
@@ -101,16 +106,59 @@ void kernel_main()
 
 	gic_intr_enable(27);
 	gic_intr_enable(82);
+
+	start_thread((uint32_t)program_entry, 'A');
+	start_thread((uint32_t)program_entry, 'B');
+
+	program_entry('K');
+}
+
+void sched_init(intr_context_t* intr_context)
+{
+	// The currently interrupted context becomes the first thread
+	threads[0].intr_context = *intr_context;
+	selected_thread = 0;
+	num_threads = 1;
 }
 
 void sched_add(intr_context_t* intr_context)
 {
+	if (num_threads == 0) {
+		sched_init(intr_context);
+	}
 
+	if (num_threads < MAX_THREADS) {
+		uint32_t thread_idx = num_threads++;
+		intr_context_t* thread_context = &(threads[thread_idx].intr_context);
+
+		// Build a new context for the thread from scratch
+		thread_context->pc = intr_context->r[1]; // svc param0 = entry
+		thread_context->sp = (uint32_t)(&_heap) + (THREAD_STACK_SIZE * thread_idx);
+		thread_context->lr = (uint32_t)(&hang); // return to spin loop
+		thread_context->cpsr = (1 << 8) | (1 << 6) | 0x1F; // Mask abort, FIQ, enter SYS mode
+		thread_context->r[0] = intr_context->r[2]; // svc param1 = entry arg0
+		for (int i = 1; i < 13; i++)
+			thread_context->r[i] = 0;
+	}
 }
 
 void sched_tick(intr_context_t* intr_context)
 {
+	if (num_threads == 0) {
+		sched_init(intr_context);
+	} else {
+		threads[selected_thread].intr_context = *intr_context;
+	}
 
+	selected_thread++;
+	if (selected_thread >= num_threads) {
+		selected_thread = 0;
+	}
+
+	if (selected_thread == 1) {
+		__asm__("nop");
+	}
+
+	// return to the newly selected thread
+	*intr_context = threads[selected_thread].intr_context;
 }
-
-

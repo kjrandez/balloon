@@ -8,17 +8,17 @@ static void print_time(char my_char, uint32_t ms) {
 	xil_printf("Thread %c, %u ms\r\n", my_char, ms);
 }
 
-void program_entry(char my_char)
+void program_entry(uint32_t my_char)
 {
 	uint32_t last_tick = 0;
 
 	while (1) {
 		uint32_t ms = time_get_milliseconds();
-		uint32_t tick = ms / 100;
+		uint32_t tick = ms / 250;
 
 		if (tick != last_tick) {
 			last_tick = tick;
-			print_time(my_char, ms);
+			print_time((char)my_char, ms);
 		}
 	}
 }

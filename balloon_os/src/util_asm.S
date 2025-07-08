@@ -3,6 +3,7 @@
 .global call_svc
 .global get_cpsr
 .global set_cpsr
+.global hang
 
 .section .text
 
@@ -26,3 +27,6 @@ call_svc:
 
 	pop {lr}
 	bx lr
+
+hang:
+	b hang

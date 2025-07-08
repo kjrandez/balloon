@@ -1,3 +1,5 @@
 #pragma once
 
-void program_entry(char my_char);
+#include "inttypes.h"
+
+void program_entry(uint32_t my_char);

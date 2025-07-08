@@ -44,7 +44,8 @@ _svc_handler:
 	cps #SVC_MODE
 
 	// preserve SP, LR
-	push {r0, r1} // +2
+	push {r0}
+	push {r1} // +2
 
 	// save current SPSR (returning cpu execution state)
 	mrs r0, spsr
@@ -59,7 +60,8 @@ _svc_handler:
 	msr spsr, r0
 
 	// fetch SP, LR
-	pop {r0, r1} // -2
+	pop {r1} // -2
+	pop {r0}
 
 	// temporarily switch to previous mode to restore shadowed registers
 	cps #SYS_MODE
@@ -82,6 +84,9 @@ _data_abort_handler:
 	b _data_abort_handler
 
 _irq_handler:
+	// when an IRQ has occurred we need to return to one instruction before the saved PC
+	sub lr, lr, #4
+
 	// preserve registers including original PC, which was auto-stored in LR
 	push {r0-r12, lr} // +14
 
@@ -92,7 +97,8 @@ _irq_handler:
 	cps #IRQ_MODE
 
 	// preserve SP, LR
-	push {r0, r1} // +2
+	push {r0} // +2
+	push {r1}
 
 	// save current SPSR (returning cpu execution state)
 	mrs r0, spsr
@@ -107,7 +113,8 @@ _irq_handler:
 	msr spsr, r0
 
 	// fetch SP, LR
-	pop {r0, r1} // -2
+	pop {r1} // -2
+	pop {r0}
 
 	// temporarily switch to previous mode to restore shadowed registers
 	cps #SYS_MODE
@@ -118,8 +125,8 @@ _irq_handler:
 	// restore registers
 	pop {r0-r12, lr} // -14
 
-	// return to same instruction, rather than following instruction
-	subs pc, lr, #4
+	// return, note the "s" suffix is restoring SPSR to CPSR
+	movs pc, lr
 
 _fiq_handler:
 	# unhandled
